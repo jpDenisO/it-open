@@ -1,5 +1,5 @@
 export default class {
-  static async getTodos(): Promise<any> {
+  static async getTodos(): Promise<Array<any>> {
     const res: Response = await fetch('/todos');
     const json = await res.json();
     return json;
@@ -11,7 +11,7 @@ export default class {
     return json;
   }
 
-  static async postTodo(data: object): Promise<any> {
+  static async createTodo(data: object): Promise<any> {
     const res: Response = await fetch(`/todos/create`, {
       method: 'POST',
       headers: {
@@ -36,10 +36,8 @@ export default class {
   }
 
   static async deleteTodo(id: string): Promise<any> {
-    const res: Response = await fetch(`/todos/create/${id}`, {
+    await fetch(`/todos/delete/${id}`, {
       method: 'DELETE'
     });
-    const json = await res.json();
-    return json;
   }
 }
