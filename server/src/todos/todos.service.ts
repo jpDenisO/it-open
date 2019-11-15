@@ -45,6 +45,6 @@ export class TodosService {
   async delete(id: string): Promise<boolean> {
     const todo = await this.todoRepository.findOne(id);
     await this.todoRepository.remove(todo);
-    return true;
+    return;
   }
 }
