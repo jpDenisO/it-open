@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
 import { TodosController } from './todos/todos.controller';
 import { Todo } from './todos/todo.entity';
 import { TodosService } from './todos/todos.service';
@@ -16,8 +17,11 @@ import { TodosService } from './todos/todos.service';
       entities: [Todo],
       synchronize: true
     }),
+    TypeOrmModule.forFeature([Todo])
   ],
   controllers: [TodosController],
   providers: [TodosService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private readonly connection: Connection) {}
+}

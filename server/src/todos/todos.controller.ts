@@ -11,23 +11,22 @@ export class TodosController {
 
   @Get()
   async getTodos(): Promise<Todo[]> {
-    console.log(this.todosService);
     return await this.todosService.findAll();
   }
 
   @Get(':id')
-  getTodo(@Param('id') id:string){
-    return `todo id: ${id}`;
+  async getTodo(@Param('id') id: string): Promise<Todo> {
+    return await this.todosService.find(id);
   }
   @Post('create')
-  createTodo(@Body() createTodoDto: CreateTodoDto ) {
-    console.log(createTodoDto);
-    return 'create ToDo';
+  async createTodo(@Body() createTodoDto: CreateTodoDto ): Promise<Todo> {
+    return await this.todosService.create(createTodoDto);
   }
   @Put('edit/:id')
-  editTodo(@Param('id') id:string) {
-    return `edit ${id} ToDo`;
+  async editTodo(@Param('id') id:string, @Body() updateTodoDto: CreateTodoDto): Promise<Todo> {
+    return await this.todosService.update(id, updateTodoDto);
   }
+
   @Delete('delete/:id')
   deleteTodo(@Param('id') id:string) {
     return `deleted ${id} ToDo`
