@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Todo {
@@ -16,4 +16,10 @@ export class Todo {
 
   @Column('bool')
   done: boolean;
+
+  @CreateDateColumn({ type: 'timestamp'})
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp'})
+  updatedAt: Date;
 }
