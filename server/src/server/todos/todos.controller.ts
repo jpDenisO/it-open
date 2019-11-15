@@ -1,4 +1,5 @@
 import { Controller, Get, Param, Post, Put, Body, Delete,  } from '@nestjs/common';
+import { CreateTodoDto } from './dto';
 
 @Controller('todos')
 export class TodosController {
@@ -12,8 +13,9 @@ export class TodosController {
     return `todo id: ${id}`;
   }
   @Post('create')
-  createTodo(@Body() body:object ) {
-    return 'create ToDo'
+  createTodo(@Body() createTodoDto: CreateTodoDto ) {
+    console.log(createTodoDto);
+    return 'create ToDo';
   }
   @Put('edit/:id')
   editTodo(@Param('id') id:string) {
